@@ -1,6 +1,12 @@
 from flask import Flask, request, jsonify
+from func import Aplication
+import requests
+
+
 
 app = Flask(__name__)
+
+BAERER_TOKEN = "EAASXZBNoNhB4BQDTqrZCpfaQvUMBRutURPnwRFuZAUqwsx3cuoYKX1XboyUnINtPq1ZB4aQoZAg8OlSVqs8nsJfVfvWtS6F10L2TdJ6oMWA0FXKRZAEUAvE3TtpQvxABeBH2OgCSBM8HvjZAr6BE8HTDy2fSydU10xpZAoerSJONDkxdNeBvvU2N79ft1FwXlAZB4wSWaHM0GwnxmoKJ6dpZCW9xp2gzmZBCypo2i2ImsIP5ZCrYw8SGfFQjBvPDOZAXus7OyfBOABguGYcrrqZBiI0110vZA3ecU6fBjal5QSPNAZDZD"
 
 # --- Configure estas variáveis ---
 VERIFY_TOKEN = "tokenReste234512234" # Use o mesmo token que você configurar na Meta
@@ -47,10 +53,8 @@ def webhook():
                                 phone_id = value.get("metadata", {}).get("phone_number_id")
                                 from_number = message.get("from")
                                 text_content = message.get("text", {}).get("body")
-
-                                print(f"\n📞 Mensagem de: {from_number}")
-                                print(f"📝 Conteúdo: {text_content}")
-                                print("--- FIM DA MENSAGEM ---")
+                                if text_content == "acessar painel":
+                                    requests.post("")
                             
                             # Se for outro tipo (imagem, vídeo, etc.), você pode expandir aqui
                             elif message.get("type") == "image":
