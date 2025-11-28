@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 from func import Aplication
+from func import APIMETA
 import requests
 
 
-
+apimeta = APIMETA(baerer="EAASXZBNoNhB4BQDTqrZCpfaQvUMBRutURPnwRFuZAUqwsx3cuoYKX1XboyUnINtPq1ZB4aQoZAg8OlSVqs8nsJfVfvWtS6F10L2TdJ6oMWA0FXKRZAEUAvE3TtpQvxABeBH2OgCSBM8HvjZAr6BE8HTDy2fSydU10xpZAoerSJONDkxdNeBvvU2N79ft1FwXlAZB4wSWaHM0GwnxmoKJ6dpZCW9xp2gzmZBCypo2i2ImsIP5ZCrYw8SGfFQjBvPDOZAXus7OyfBOABguGYcrrqZBiI0110vZA3ecU6fBjal5QSPNAZDZD", version=24.0, phone_id=871508606049549)
 app = Flask(__name__)
 
 BAERER_TOKEN = "EAASXZBNoNhB4BQDTqrZCpfaQvUMBRutURPnwRFuZAUqwsx3cuoYKX1XboyUnINtPq1ZB4aQoZAg8OlSVqs8nsJfVfvWtS6F10L2TdJ6oMWA0FXKRZAEUAvE3TtpQvxABeBH2OgCSBM8HvjZAr6BE8HTDy2fSydU10xpZAoerSJONDkxdNeBvvU2N79ft1FwXlAZB4wSWaHM0GwnxmoKJ6dpZCW9xp2gzmZBCypo2i2ImsIP5ZCrYw8SGfFQjBvPDOZAXus7OyfBOABguGYcrrqZBiI0110vZA3ecU6fBjal5QSPNAZDZD"
@@ -54,8 +55,9 @@ def webhook():
                                 from_number = message.get("from")
                                 text_content = message.get("text", {}).get("body")
                                 if text_content == "acessar painel":
-                                    requests.post("")
-                            
+                                    print(from_number)
+                                    response = apimeta.send_message(destiny=int(from_number), content_type="text", content={"body": "Opa"})
+                                    print(response.json())
                             # Se for outro tipo (imagem, vídeo, etc.), você pode expandir aqui
                             elif message.get("type") == "image":
                                 print(f"🖼️ Recebida uma Imagem de: {message.get('from')}")
